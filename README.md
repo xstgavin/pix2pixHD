@@ -140,5 +140,9 @@ If you find this useful for your research, please use the following.
 }
 ```
 
+## Requirement:
+torch=1.0.1 (can train, 0.4.1 also can but not tested)
+
+
 ## Acknowledgments
 This code borrows heavily from [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix).

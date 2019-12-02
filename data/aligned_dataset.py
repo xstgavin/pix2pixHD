@@ -6,11 +6,10 @@ from PIL import Image
 class AlignedDataset(BaseDataset):
     def initialize(self, opt):
         self.opt = opt
-        self.root = opt.dataroot    
-
+        self.root = opt.dataroot
         ### input A (label maps)
         dir_A = '_A' if self.opt.label_nc == 0 else '_label'
-        self.dir_A = os.path.join(opt.dataroot, opt.phase + dir_A)
+        self.dir_A = os.path.join(self.root, opt.phase + dir_A)
         self.A_paths = sorted(make_dataset(self.dir_A))
 
         ### input B (real images)
@@ -33,6 +32,7 @@ class AlignedDataset(BaseDataset):
         self.dataset_size = len(self.A_paths) 
       
     def __getitem__(self, index):        
+        #print("AlignedDataset:",index)
         ### input A (label maps)
         A_path = self.A_paths[index]              
         A = Image.open(A_path)        

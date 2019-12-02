@@ -124,6 +124,7 @@ class Pix2PixHDModel(BaseModel):
         if not self.opt.no_instance:
             inst_map = inst_map.data.cuda()
             edge_map = self.get_edges(inst_map)
+            #print(input_label.shape, edge_map.shape)
             input_label = torch.cat((input_label, edge_map), dim=1)         
         input_label = Variable(input_label, volatile=infer)
 
@@ -261,6 +262,7 @@ class Pix2PixHDModel(BaseModel):
 
     def get_edges(self, t):
         edge = torch.cuda.ByteTensor(t.size()).zero_()
+        print(edge.dtype, t.dtype, edge.shape)
         edge[:,:,:,1:] = edge[:,:,:,1:] | (t[:,:,:,1:] != t[:,:,:,:-1])
         edge[:,:,:,:-1] = edge[:,:,:,:-1] | (t[:,:,:,1:] != t[:,:,:,:-1])
         edge[:,:,1:,:] = edge[:,:,1:,:] | (t[:,:,1:,:] != t[:,:,:-1,:])
